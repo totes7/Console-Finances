@@ -93,15 +93,12 @@ var finances = [
 
 let totalMonths = finances.length;
 
-console.log(totalMonths);
-
 // The net total amount of Profit/Losses over the entire period.
 // The average of the changes in Profit/Losses over the entire period.
 // You will need to track what the total change in Profit/Losses are from month to month and then find the average.
 // (Total/(Number of months - 1))
 
 let total = finances[0][1];
-console.log(total);
 
 let changes = [];
 
@@ -110,13 +107,36 @@ for (let i = 0; i < totalMonths - 1; i++) {
   total = total + finances[i + 1][1];
   let variance = finances[i][1] - finances[i + 1][1];
   variance = -variance;
-  console.log(variance);
+  changes.push(variance);
 
 }
 
-console.log(total);
+let sum = 0;
 
+changes.forEach((change) => {
+
+  sum += change;
+
+})
+
+let average = (sum / changes.length).toFixed(2);
 
 // The greatest increase in Profit/Losses (date and difference in the amounts) over the entire period.
 
+let increase = Math.max(...changes);
+let x = changes.indexOf(increase);
+
 // The greatest decrease in Profit/Losses (date and difference in the amounts) over the entire period.
+
+let decrease = Math.min(...changes);
+let y = changes.indexOf(decrease);
+
+// Print everything out to the console
+
+console.log("Financial Analysis");
+console.log("----------------");
+console.log("Total Months: " + totalMonths);
+console.log("Total: $" + total);
+console.log("Average Change: " + average);
+console.log("Greatest Increase in Profits/Losses: " + finances[x + 1][0] + " ($" + increase + ")");
+console.log("Greatest Decrease in Profits/Losses: " + finances[y + 1][0] + " ($" + decrease + ")");
